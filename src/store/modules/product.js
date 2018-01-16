@@ -12,15 +12,20 @@ export default {
     }
   },
   actions: {
-    getAll (context) {
-      return window.axios.get('/products').then(Response => {
+    remove (context, id) {
+      window.axios.delete('/products/' + id).then(Response => {
         Response.data = Response.data.data.map(element => [element._id, element.barCode, element.name, element.value])
         context.commit('insertAll', Response.data)
-        return Response.data
       })
     },
-    getOne (context, id) {
-      window.axios.get('/products/' + id).then(Response => {
+    getAll (context) {
+      window.axios.get('/products').then(Response => {
+        Response.data = Response.data.data.map(element => [element._id, element.barCode, element.name, element.value])
+        context.commit('insertAll', Response.data)
+      })
+    },
+    getOne (context, data) {
+      window.axios.get('/products/' + data).then(Response => {
         let result = {
           id: Response.data.data._id,
           barCode: Response.data.data.barCode,
@@ -31,13 +36,43 @@ export default {
       })
     },
     post (context, data) {
-      window.axios.post('/products/', data)
-    },
-    delete (context, id) {
-      window.axios.delete('/products/' + id)
+      window.axios.post('/products/', data).then(Response => {
+        Response.data = Response.data.data.map(element => [element._id, element.barCode, element.name, element.value])
+        context.commit('insertAll', Response.data)
+      })
     },
     put (context, data) {
-      window.axios.put('/products/' + data.id, data)
+      window.axios.put('/products/' + data.id, data).then(Response => {
+        Response.data = Response.data.data.map(element => [element._id, element.barCode, element.name, element.value])
+        context.commit('insertAll', Response.data)
+      })
+    },
+    getDetails (context, data) {
+      window.axios.get('/products/details/' + data).then(Response => {
+        let result = {
+          id: Response.data.data._id,
+          history: Response.data.data.history
+        }
+        context.commit('updateOne', result)
+      })
+    },
+    postDetails (context, data) {
+      window.axios.post('/products/details/' + data.id, {history: data.product}).then(Response => {
+        let result = {
+          id: Response.data.data._id,
+          history: Response.data.data.history
+        }
+        context.commit('updateOne', result)
+      })
+    },
+    putDetails (context, data) {
+      window.axios.put('/products/details/' + data.id, {history: data.product}).then(Response => {
+        let result = {
+          id: Response.data.data._id,
+          history: Response.data.data.history
+        }
+        context.commit('updateOne', result)
+      })
     }
   }
 }

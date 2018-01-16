@@ -13,33 +13,41 @@ export default {
   },
   actions: {
     getAll (context) {
-      return window.axios.get('/clients').then(Response => {
+      window.axios.get('/clients').then(Response => {
         Response.data = Response.data.data.map(element => [element._id, element.name])
         context.commit('insertAll', Response.data)
-        return Response.data
       })
     },
     getOne (context, id) {
       window.axios.get('/clients/' + id).then(Response => {
         let result = {
-          id: Response.data.dasta._id,
+          id: Response.data.data._id,
           name: Response.data.data.name,
-          cpf: Response.data.data.cpf,
-          phone: [Response.data.data.phones],
-          adress: Response.data.data.adress,
+          phones: Response.data.data.phones,
+          address: Response.data.data.address,
           complement: Response.data.data.complement
         }
+        console.log(result)
         context.commit('updateOne', result)
       })
     },
     post (context, data) {
-      window.axios.post('/clients/', data)
+      window.axios.post('/clients/', data).then(Response => {
+        Response.data = Response.data.data.map(element => [element._id, element.name])
+        context.commit('insertAll', Response.data)
+      })
     },
     delete (context, data) {
-      window.axios.delete('/clients/' + data)
+      window.axios.delete('/clients/' + data).then(Response => {
+        Response.data = Response.data.data.map(element => [element._id, element.name])
+        context.commit('insertAll', Response.data)
+      })
     },
     put (context, data) {
-      window.axios.put('/clients/' + data.id, data)
+      window.axios.put('/clients/' + data.id, data).then(Response => {
+        Response.data = Response.data.data.map(element => [element._id, element.name])
+        context.commit('insertAll', Response.data)
+      })
     }
   }
 }

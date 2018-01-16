@@ -9,6 +9,12 @@ import './components/Global'
 require('materialize-css')
 require('materialize-css/dist/css/materialize.min.css')
 
+Vue.directive('focus', {
+  inserted: function (el) {
+    el.focus()
+  }
+})
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

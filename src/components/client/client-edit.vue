@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div class="container teste">
   <div class="col s12 z-depth-4 card-panel">
       <form class="login-form" @submit.prevent="save()">
         <div class="row">
@@ -8,18 +8,14 @@
         </div>
         </div>
         <div class="row margin">
-          <div class="input-field col s9">
+          <div class="input-field col s12">
             <input class="active validate" type="text" required v-model="client.name">
             <label>Name*</label>
           </div>
-          <div class="input-field col s3">
-            <input class="active validate" type="text" v-model="client.cpf">
-            <label>CPF</label>
-          </div>
         </div>
         <div class="row margin">
-          <div class="input-field col s3" v-for="phone in client.phones">
-            <input class="active validate" type="number" v-model="client.phones.phone">
+          <div class="input-field col s3" v-for="phone in phones+1">
+            <input class="active validate" type="number" v-model="client.phones[phone]">
             <label>Fone</label>
           </div>
           <div class="input-field col s1">
@@ -28,7 +24,7 @@
         </div>
         <div class="row margin">
           <div class="input-field col s12">
-            <input class="active validate" type="text" v-model="client.adress">
+            <input class="active validate" type="text" v-model="client.address">
             <label>Endereço</label>
           </div>
         </div>
@@ -55,12 +51,15 @@
 export default {
   data () {
     return {
+      client: {},
+      phones: 0
     }
   },
   methods: {
     save: function () {
-      this.$store.client.dispatch('put', this.client)
-      this.$router.push('/clients')
+      this.$store.client.dispatch('put', this.client).then(() => {
+        this.$router.push('/clients')
+      })
     }
   },
   created () {

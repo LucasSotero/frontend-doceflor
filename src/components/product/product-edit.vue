@@ -9,22 +9,20 @@
         </div>
         <div class="row margin">
           <div class="input-field col s12">
-            <input type="text"  class="active validate" required id="prodcutName" v-model="product.name">
-            <label>Descrição*</label>
+            <input type="text"  class="validate" required id="prodcutName" v-focus v-model="product.name">
+            <label class="active">Descrição*</label>
           </div>
         </div>
         <div class="row margin">
           <div class="input-field col s5">
-            <input type="text"  class="active validate" required v-model="product.barCode">
-            <label>Código de Barras</label>
+            <input type="text"  class="validate" required v-model="product.barCode">
+            <label class="active">Código de Barras</label>
           </div>
           <div class="input-field col s3">
-            <input type="number"  class="active validate" required v-model="product.amount">
-            <label>Quantidade</label>
           </div>
           <div class="input-field col s4">
-            <input type="number"  class="active validate" required v-model="product.value">
-            <label>Valor</label>
+            <input type="number"  class="validate" required v-model="product.value">
+            <label class="active">Valor</label>
           </div>
         </div>
         <div class="row">
@@ -49,9 +47,7 @@ export default {
   methods: {
     save: function () {
       this.$store.product.dispatch('put', this.product).then(() => {
-        this.$store.product.dispatch('getAll').then(() => {
-          this.$router.push('/products')
-        })
+        this.$router.push('/products')
       })
     }
   },

@@ -5,10 +5,12 @@ import Hello from '@/components/Hello'
 import ProductEdit from '@/components/product/product-edit'
 import ProductShow from '@/components/product/product-show'
 import ProductInsert from '@/components/product/product-insert'
+import ProductDatails from '@/components/product/product-details'
 
 import clientEdit from '@/components/client/client-edit'
 import clientShow from '@/components/client/client-show'
 import clientInsert from '@/components/client/client-insert'
+import clientDatails from '@/components/client/client-details'
 
 import sales from '@/components/sale/Sale'
 
@@ -35,6 +37,10 @@ export default new Router({
       component: ProductInsert
     },
     {
+      path: '/products/details/:id',
+      component: ProductDatails
+    },
+    {
       path: '/clients',
       name: 'clients',
       component: clientShow
@@ -46,6 +52,10 @@ export default new Router({
     {
       path: '/clients/new/',
       component: clientInsert
+    },
+    {
+      path: '/clients/details/',
+      component: clientDatails
     },
     {
       path: '/sales/',

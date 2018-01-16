@@ -4,7 +4,7 @@
 <div class="col s12">
         <div class="row z-depth-1">
         <div class="input-field col s3">
-          <input id="last_name" placeholder="Código de Barras" type="text" class="validate">
+          <input id="last_name" placeholder="Código de Barras" type="text" class="validate" @keyup.enter="addProduct" v-model="barcode" v-focus>
         </div>
         <div class="row col s9">
           <div class="input-field col s3 right">
@@ -20,7 +20,25 @@
   <div class="col s9">
     <div class="row col s12 z-depth-1">
       <div class="col s12">
-        <v-table :header="headerTable" :body="bodyTable"></v-table>
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Valor</th>
+              <th class="center-padding">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(line,key) in products">
+              <td>{{line.name}}</td>
+              <td>{{line.value}}</td>
+              <td class="right">
+                <a class="waves-effect waves-light btn-small blue btn"><i class="material-icons" @click.prevent="discount(key)">edit</i></a>
+                <a class="waves-effect waves-light btn-small red btn" @click.prevent="delProduct(key)"><i class="material-icons">delete</i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -94,18 +112,6 @@ import $ from 'jquery'
 export default {
   data () {
     return {
-      headerTable: ['Nome', 'Valor'],
-      bodyTable: [
-        {
-          name: 'calça',
-          value: 100
-        },
-        {
-          name: 'blusa',
-          value: 100
-        }
-      ],
-      total: 200
     }
   },
   methods: {
@@ -113,6 +119,32 @@ export default {
       $('.modal').modal()
       $('#payment').modal('open')
       $('.trigger-modal').modal()
+    },
+    addProduct: function () {
+      this.$store.sale.dispatch('getOne', this.barcode)
+      this.barcode = ''
+    },
+    delProduct: function (key) {
+      this.$store.sale.commit('removeOne', key)
+    },
+    discount: function (key) {
+      let result = {
+        key: key,
+        data: 1
+      }
+      this.$store.sale.commit('updateValue', result)
+    }
+  },
+  computed: {
+    products: function () {
+      return this.$store.sale.state.products
+    },
+    total: function () {
+      let sum = 0
+      this.$store.sale.state.products.forEach(element => {
+        sum += element.value
+      })
+      return sum
     }
   }
 }
@@ -123,5 +155,9 @@ export default {
     height: 24px;
     line-height: 24px;
     padding: 0 0.5rem;
+}
+.center-padding {
+  text-align: right;
+  padding: 2.5%;
 }
 </style>

@@ -8,18 +8,14 @@
         </div>
         </div>
         <div class="row margin">
-          <div class="input-field col s9">
+          <div class="input-field col s12">
             <input type="text"  class="active validate" required v-model="client.name">
             <label>Name*</label>
-          </div>
-          <div class="input-field col s3">
-            <input type="text"  class="active validate" v-model="client.cpf">
-            <label>CPF</label>
           </div>
         </div>
         <div class="row margin">
           <div class="input-field col s3" v-for="phone in phones">
-            <input type="number"  class="active validate" v-model="client.phones">
+            <input type="number"  class="active validate" v-model="client.phones[phone]">
             <label>Fone</label>
           </div>
           <div class="input-field col s1">
@@ -28,7 +24,7 @@
         </div>
         <div class="row margin">
           <div class="input-field col s12">
-            <input type="text"  class="active validate" v-model="client.adress">
+            <input type="text"  class="active validate" v-model="client.address">
             <label>Endereço</label>
           </div>
         </div>
@@ -56,14 +52,14 @@ export default {
   data () {
     return {
       client: {},
-      phones: 1
+      phones: 0
     }
   },
   methods: {
     save: function () {
-      this.$store.client.dispatch('post', this.client)
-      this.$store.client.dispatch('getAll')
-      this.$router.push('/clients')
+      this.$store.client.dispatch('post', this.client).then(() => {
+        this.$router.push('/clients')
+      })
     }
   }
 }

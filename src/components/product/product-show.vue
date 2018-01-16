@@ -17,35 +17,16 @@
         <td>{{product[2]}}</td>
         <td>{{product[3]}}</td>
         <td class="right">
-          <a class="waves-effect waves-light btn-small green btn" @click="inventoryMovement(product[0])"><i class="material-icons">import_export</i></a>
+          <a class="waves-effect waves-light btn-small green btn" @click="stock(product[0])"><i class="material-icons">import_export</i></a>
           <a class="waves-effect waves-light btn-small blue btn" @click="details(product[0])"><i class="material-icons">edit</i></a>
           <a class="waves-effect waves-light btn-small red btn" @click="del(product[0])"><i class="material-icons">delete</i></a>
         </td>
       </tr>
     </tbody>
   </table>
-  <div id="inventoryMovement" class="modal">
-    <form class="col s12"  @submit.prevent="saveInventoryMovement">
-      <div class="modal-content">
-        <div class="row">
-          <div class="input-field col s4">
-            <input type="number" class="validate">
-            <label>Custo</label>
-          </div>
-          <div class="col s1"></div>
-          <div class="input-field col s4">
-            <input type="number" class="validate">
-            <label>Quantidade</label>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class=" modal-action modal-close waves-effect btn">Salvar</button>
-      </div>
-    </form>
-  </div>
 </div>
 </template>
+
 
 <script>
 import $ from 'jquery'
@@ -61,8 +42,7 @@ export default {
   },
   methods: {
     del: function (id) {
-      this.$store.product.dispatch('delete', id).then((result) => {
-        return this.$store.product.dispatch('getAll')
+      this.$store.product.dispatch('remove', id).then(() => {
       })
     },
     details: function (id) {
@@ -75,6 +55,9 @@ export default {
     },
     saveInventoryMovement: function () {
       alert('123')
+    },
+    stock: function (id) {
+      this.$router.push('/products/details/' + id)
     }
   }
 }

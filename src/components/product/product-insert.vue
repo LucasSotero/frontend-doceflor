@@ -9,7 +9,7 @@
         </div>
         <div class="row margin">
           <div class="input-field col s12">
-            <input type="text" class="validate" required v-model="product.name">
+            <input type="text" class="validate" required v-focus v-model="product.name">
             <label>Descrição*</label>
           </div>
         </div>
@@ -19,8 +19,6 @@
             <label>Código de Barras</label>
           </div>
           <div class="input-field col s3">
-            <input type="number" class="validate" required v-model="product.amount">
-            <label>Quantidade</label>
           </div>
           <div class="input-field col s4">
             <input type="number" class="validate" required v-model="product.value">
@@ -50,9 +48,7 @@ export default {
   methods: {
     save: function () {
       this.$store.product.dispatch('post', this.product).then(() => {
-        this.$store.product.dispatch('getAll').then(() => {
-          this.$router.push('/products')
-        })
+        this.$router.push('/products')
       })
     }
   }
