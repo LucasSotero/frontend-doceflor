@@ -1,94 +1,66 @@
 <template>
 <div class="container">
-  <div class="row margin"></div>
-    <a class="waves-effect waves-light btn" @click="register()">Novo</a>
-  <table>
-    <thead>
-      <tr>
-        <th>Data</th>
-        <th>Quantidade</th>
-        <th>Valor</th>
-        <th>Tipo</th>
-        <th class="center-padding">Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="line in sale.history">
-        <td>{{line.date}}</td>
-        <td>{{line.amount}}</td>
-        <td>{{line.value}}</td>
-        <td v-if="line.io">Entrada</td>
-        <td v-else>Saída</td>
-        <td class="right">
-          <a class="waves-effect waves-light btn-small red btn" @click="del(line._id)"><i class="material-icons">delete</i></a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <div id="inventoryMovement" class="modal">
-    <form class="col s12"  @submit.prevent="save">
-      <div class="modal-content">
+  <div class="col s12 z-depth-4 card-panel">
+      <form class="login-form" @submit.prevent="save()">
         <div class="row">
-          <div class="input-field col s3">
-            <input type="text" class="validate" v-focus v-model="newsale.date">
-            <label>Data</label>
+          <div class="input-field col s12 center">
+          <h5 class="center login-form-text">Venda {{sale.code}}</h5>
+        </div>
+        </div>
+        <div class="row margin">
+          <div class="input-field col s8">
+            <input type="text"  class="validate" required id="prodcutName" v-focus>
+            <label class="active">Cliente</label>
           </div>
-          <div class="input-field col s3">
-            <input type="number" class="validate" v-model="newsale.value">
-            <label>Custo</label>
-          </div>
-          <div class="col s1"></div>
-          <div class="input-field col s3">
-            <input type="number" class="validate" v-model="newsale.amount">
-            <label>Quantidade</label>
-          </div>
-          <div class="input-field col s2">
-            <a class="waves-effect waves-light red left col s12 btn"><i class="material-icons">delete</i></a>
+          <div class="input-field col s4">
+            <input type="text"  class="validate" required id="prodcutName" v-focus>
+            <label class="active">Data</label>
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class=" modal-action modal-close waves-effect btn">Salvar</button>
-      </div>
-    </form>
-  </div>
+        <div>
+          <table>
+            <thead>
+                <tr>
+                  <th>Produto</th>
+                  <th>valor</th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr v-for="line in sale.products">
+                <td>{{line.name}}</td>
+                <td>{{line.value}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <div class="input-field col s4">
+            <button class="btn waves-effect waves-light left col s12 blue"  type="submit" >Salvar</button>
+          </div>
+          <div class="input-field col s4">
+            <router-link to="/sales" class="btn waves-effect waves-light left col s12 red">Cancelar</router-link>
+          </div>
+        </div>
+      </form>
+    </div>
 </div>
 </template>
 
 <script>
-import $ from 'jquery'
 export default {
   data () {
     return {
-      newsale: {}
     }
   },
   methods: {
-    register: function () {
-      $('.modal').modal()
-      $('#inventoryMovement').modal('open')
-      $('.trigger-modal').modal()
-    },
-    del: function (id) {
-      let result = {
-        id: this.$route.params.id,
-        sale: {
-          _id: id
-        }
-      }
-      this.$store.sale.dispatch('putDetails', result)
-    },
     save: function () {
-      let result = {
-        id: this.$route.params.id,
-        sale: this.newsale
-      }
-      this.newsale = {}
-      this.$store.sale.dispatch('postDetails', result)
+      this.$store.sale.dispatch('put', this.sale).then(() => {
+        this.$router.push('/sales')
+      })
     }
   },
   created () {
-    this.$store.sale.dispatch('getDetails', this.$route.params.id)
+    this.$store.sale.dispatch('getOne', this.$route.params.id)
   },
   computed: {
     sale: function () {
@@ -97,15 +69,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.btn-small {
-    height: 24px;
-    line-height: 24px;
-    padding: 0 0.5rem;
-}
-.center-padding {
-  text-align: right;
-  padding: 2.5%;
-}
-</style>
