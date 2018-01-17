@@ -1,38 +1,59 @@
 <template>
-   <ul class="collapsible  popout" data-collapsible="accordion">
-    <li>
-      <div class="collapsible-header active"><i class="material-icons">place</i>Second</div>
-      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-    </li>
-    <li>
-      <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
-      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-    </li>
-    <li>
-      <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
-      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-    </li>
-  </ul>
+   <div class="container">
+     <div class="row"></div>
+     <div class="row">
+       <table>
+         <thead>
+           <tr>
+            <th>Data</th>
+            <th>Valor</th>
+            <th>Status</th>
+            <th>Método</th>
+            <th>Ações</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr v-for="data in tst">
+            <td>{{data.date}}</td>
+            <td>{{data.value}}</td>
+            <td>{{data.status}}</td>
+            <td>{{data.pay}}</td>
+            <td>
+              <a class="waves-effect waves-light btn-small blue btn" @click="details(client[0])"><i class="material-icons">launch</i></a>
+            </td>
+           </tr>
+         </tbody>
+       </table>
+     </div>
+   </div>
 </template>
 
 <script>
-import $ from 'jquery'
 export default {
   data () {
-  },
-  created () {
-    $(document).ready(function () {
-      $('.collapsible').collapsible({
-        accordion: false,
-        onOpen: function (el) {
-          alert('Open')
-        },
-        onClose: function (el) {
-          alert('Closed')
+    return {
+      tst: [
+        {
+          date: '2017',
+          value: 50,
+          status: true,
+          pay: 'Diner'
         }
-      })
-    })
+      ]
+    }
   }
 }
 </script>
 
+
+<style>
+.btn-small {
+    height: 24px;
+    line-height: 24px;
+    padding: 0 0.5rem;
+}
+.center-padding {
+  text-align: right;
+  padding: 2.5%;
+}
+</style>

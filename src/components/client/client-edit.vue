@@ -14,10 +14,6 @@
           </div>
         </div>
         <div class="row margin">
-          <div class="input-field col s3" v-for="phone in phones+1">
-            <input class="active validate" type="number" v-model="client.phones[phone]">
-            <label>Fone</label>
-          </div>
           <div class="input-field col s1">
             <button class="btn waves-effect waves-light left col s12" @click.prevent="phones++"><i class="material-icons">add</i></button>
           </div>

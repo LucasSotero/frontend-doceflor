@@ -121,27 +121,27 @@ export default {
       $('.trigger-modal').modal()
     },
     addProduct: function () {
-      this.$store.sale.dispatch('getOne', this.barcode)
+      this.$store.pdv.dispatch('getOne', this.barcode)
       this.barcode = ''
     },
     delProduct: function (key) {
-      this.$store.sale.commit('removeOne', key)
+      this.$store.pdv.commit('removeOne', key)
     },
     discount: function (key) {
       let result = {
         key: key,
         data: 1
       }
-      this.$store.sale.commit('updateValue', result)
+      this.$store.pdv.commit('updateValue', result)
     }
   },
   computed: {
     products: function () {
-      return this.$store.sale.state.products
+      return this.$store.pdv.state.products
     },
     total: function () {
       let sum = 0
-      this.$store.sale.state.products.forEach(element => {
+      this.$store.pdv.state.products.forEach(element => {
         sum += element.value
       })
       return sum

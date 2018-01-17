@@ -12,7 +12,9 @@ import clientShow from '@/components/client/client-show'
 import clientInsert from '@/components/client/client-insert'
 import clientDatails from '@/components/client/client-details'
 
-import sales from '@/components/sale/Sale'
+import sale from '@/components/sale/Sale'
+import saleShow from '@/components/sale/sale-show'
+import saleDatails from '@/components/sale/sale-details'
 
 Vue.use(Router)
 
@@ -22,6 +24,14 @@ export default new Router({
       path: '/',
       name: 'Hello',
       component: Hello
+    },
+    {
+      path: '/sales',
+      component: saleShow
+    },
+    {
+      path: '/sales/view/:id',
+      component: saleDatails
     },
     {
       path: '/products',
@@ -58,8 +68,8 @@ export default new Router({
       component: clientDatails
     },
     {
-      path: '/sales/',
-      component: sales
+      path: '/sale/',
+      component: sale
     }
   ]
 })

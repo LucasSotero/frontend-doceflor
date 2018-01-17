@@ -20,14 +20,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="product in products">
-        <td>{{product[1]}}</td>
-        <td>{{product[2]}}</td>
-        <td>{{product[3]}}</td>
+      <tr v-for="sale in sales">
+        <td>{{sale[1]}}</td>
+        <td>{{sale[2]}}</td>
+        <td>{{sale[3]}}</td>
         <td class="right">
-          <a class="waves-effect waves-light btn-small green btn" @click="stock(product[0])"><i class="material-icons">import_export</i></a>
-          <a class="waves-effect waves-light btn-small blue btn" @click="details(product[0])"><i class="material-icons">edit</i></a>
-          <a class="waves-effect waves-light btn-small red btn" @click="del(product[0])"><i class="material-icons">delete</i></a>
+          <a class="waves-effect waves-light btn-small green btn" @click="stock(sale[0])"><i class="material-icons">import_export</i></a>
+          <a class="waves-effect waves-light btn-small blue btn" @click="details(sale[0])"><i class="material-icons">edit</i></a>
+          <a class="waves-effect waves-light btn-small red btn" @click="del(sale[0])"><i class="material-icons">delete</i></a>
         </td>
       </tr>
     </tbody>
@@ -39,14 +39,19 @@
 <script>
 import $ from 'jquery'
 export default {
-  name: 'product-show',
+  name: 'sale-show',
   computed: {
-    products: function () {
-      return this.$store.product.state.products
+    sales: function () {
+      return this.$store.sale.state.sales
     }
   },
   mounted () {
-    this.$store.product.dispatch('getAll')
+    this.$store.sale.dispatch('getAll').then(() => {
+      var teste = this.$store.sale.state.sales
+      teste.forEach(element => {
+        console.log(element)
+      })
+    })
     var teste = {
       'Apple': null,
       'Microsoft': null,
@@ -61,11 +66,11 @@ export default {
   },
   methods: {
     del: function (id) {
-      this.$store.product.dispatch('remove', id).then(() => {
+      this.$store.sale.dispatch('remove', id).then(() => {
       })
     },
     details: function (id) {
-      this.$router.push('/products/view/' + id)
+      this.$router.push('/sales/view/' + id)
     },
     inventoryMovement: function (id) {
       $('.modal').modal()
@@ -76,7 +81,7 @@ export default {
       alert('123')
     },
     stock: function (id) {
-      this.$router.push('/products/details/' + id)
+      this.$router.push('/sales/details/' + id)
     }
   }
 }
