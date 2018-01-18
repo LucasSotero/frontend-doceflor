@@ -1,6 +1,7 @@
 export default {
   state: {
     clients: [],
+    sales: [],
     client: {}
   },
   mutations: {
@@ -9,6 +10,9 @@ export default {
     },
     updateOne (state, data) {
       state.client = data
+    },
+    insertSales (state, data) {
+      state.sales = data
     }
   },
   actions: {
@@ -48,6 +52,13 @@ export default {
         Response.data = Response.data.data.map(element => [element._id, element.name])
         context.commit('insertAll', Response.data)
       })
+    },
+    sales (context, data) {
+      window.axios.get('/sales/search/' + data).then(Response => {
+        Response.data = Response.data.data.map(element => [element._id, element.data, element.code, element.value])
+        context.commit('insertSales', Response.data)
+      })
     }
+
   }
 }

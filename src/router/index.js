@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/Hello'
 
 import ProductEdit from '@/components/product/product-edit'
-import ProductShow from '@/components/product/product-show'
 import ProductInsert from '@/components/product/product-insert'
 import ProductDatails from '@/components/product/product-details'
 
@@ -16,15 +14,12 @@ import sale from '@/components/sale/Sale'
 import saleShow from '@/components/sale/sale-show'
 import saleDatails1 from '@/components/sale/sale-details'
 
+import p from './products'
+
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    {
-      path: '/',
-      name: 'Hello',
-      component: Hello
-    },
     {
       path: '/sales',
       component: saleShow
@@ -33,11 +28,7 @@ export default new Router({
       path: '/sales/details/:id',
       component: saleDatails1
     },
-    {
-      path: '/products',
-      name: 'products',
-      component: ProductShow
-    },
+    p,
     {
       path: '/products/view/:id',
       component: ProductEdit
@@ -64,7 +55,7 @@ export default new Router({
       component: clientInsert
     },
     {
-      path: '/clients/details/',
+      path: '/clients/details/:id',
       component: clientDatails
     },
     {

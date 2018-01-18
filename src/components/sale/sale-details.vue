@@ -60,7 +60,7 @@ export default {
     }
   },
   created () {
-    this.$store.sale.dispatch('getOne', this.$route.params.id)
+    this.$store.sale.dispatch('getAll', this.$route.params.id)
   },
   computed: {
     sale: function () {
