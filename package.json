@@ -11,10 +11,11 @@
         "lint": "eslint --ext .js,.vue src"
     },
     "dependencies": {
-        "express": "3.0.6",
         "axios": "^0.17.1",
+        "express": "3.0.6",
         "jquery": "^3.2.1",
         "materialize-css": "^0.100.2",
+        "serve-static": "^1.13.1",
         "vue": "^2.5.2",
         "vue-router": "^3.0.1",
         "vuex": "^3.0.1"
