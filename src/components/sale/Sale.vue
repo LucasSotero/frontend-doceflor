@@ -62,7 +62,7 @@
   </div>
   </div>
   <div id="payment" class="modal">
-    <form class="col s12"  @submit.prevent="savePayment">
+    <form class="col s12"  @submit.prevent="createSale">
       <div class="modal-content">
         <div class="row">
           <div class="col s1"></div>
@@ -71,7 +71,7 @@
           </div>
           <div class="col s2"></div>
           <div class="input-field col s4">
-            <input type="number" class="validate">
+            <input type="number" class="validate" v-model="sale.methods.money">
             <label>Dinheiro</label>
           </div>
         </div>
@@ -82,7 +82,7 @@
           </div>
           <div class="col s2"></div>
           <div class="input-field col s4">
-            <input type="number" class="validate">
+            <input type="number" class="validate" v-model="sale.methods.card">
             <label>Cartão</label>
           </div>
         </div>
@@ -93,7 +93,7 @@
           </div>
           <div class="col s2"></div>
           <div class="input-field col s4">
-            <input type="number" class="validate">
+            <input type="number" class="validate" v-model="sale.methods.spun">
             <label>Fiado</label>
           </div>
         </div>
@@ -112,6 +112,11 @@ import $ from 'jquery'
 export default {
   data () {
     return {
+      barcode: null,
+      sale: {
+        methods: [],
+        products: []
+      }
     }
   },
   methods: {
@@ -133,6 +138,13 @@ export default {
         data: 1
       }
       this.$store.pdv.commit('updateValue', result)
+    },
+    createSale: function () {
+      this.sale.products = this.$store.pdv.state.products
+      console.log(this.sale)
+      this.$store.sale.dispatch('postsale', this.sale).then((res) => {
+        console.log('RES' + res)
+      })
     }
   },
   computed: {

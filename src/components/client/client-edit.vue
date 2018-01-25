@@ -4,7 +4,7 @@
       <form class="login-form" @submit.prevent="save()">
         <div class="row">
           <div class="input-field col s12 center">
-          <h5 class="center login-form-text">Criar Cliente</h5>
+          <h5 class="center login-form-text">Editar Cliente</h5>
         </div>
         </div>
         <div class="row margin">

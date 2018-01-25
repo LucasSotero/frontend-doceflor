@@ -6,7 +6,7 @@ import pdv from './modules/pdv'
 import sale from './modules/sale'
 
 window.axios = require('axios')
-window.axios.defaults.baseURL = 'https://fathomless-badlands-39249.herokuapp.com'
+window.axios.defaults.baseURL = 'http://localhost:9000'
 window.axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
 Vue.use(Vuex)

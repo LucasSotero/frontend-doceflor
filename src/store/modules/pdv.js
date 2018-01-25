@@ -24,9 +24,6 @@ export default {
         }
         context.commit('updateOne', result)
       })
-    },
-    save (context, data) {
-      window.axios.post('/sales', data)
     }
   }
 }

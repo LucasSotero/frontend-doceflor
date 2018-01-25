@@ -13,7 +13,8 @@
       <tr v-for="client in clients">
         <td>{{client[1]}}</td>
         <td class="right">
-          <a class="waves-effect waves-light btn-small blue btn" @click="details(client[0])"><i class="material-icons">edit</i></a>
+          <a class="waves-effect waves-light btn-small green btn" @click="details(client[0])"><i class="material-icons">subject</i></a>
+          <a class="waves-effect waves-light btn-small blue btn" @click="edit(client[0])"><i class="material-icons">edit</i></a>
           <a class="waves-effect waves-light btn-small red btn" @click="del(client[0])"><i class="material-icons">delete</i></a>
         </td>
       </tr>
@@ -39,8 +40,12 @@ export default {
       this.$store.client.dispatch('getAll')
     },
     details: function (id) {
+      this.$router.push('/clients/details/' + id)
+    },
+    edit: function (id) {
       this.$router.push('/clients/view/' + id)
     }
+
   }
 }
 </script>

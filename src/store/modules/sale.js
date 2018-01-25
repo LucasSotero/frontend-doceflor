@@ -37,9 +37,8 @@ export default {
         context.commit('updateOne', result)
       })
     },
-    post (context, data) {
+    postsale (context, data) {
       window.axios.post('/sales/', data).then(Response => {
-        Response.data = Response.data.data.map(element => [element._id, element.code, element.client, element.date, element.value])
         context.commit('insertAll', Response.data)
       })
     },
