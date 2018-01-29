@@ -5,6 +5,7 @@ import ProductEdit from '@/components/product/product-edit'
 import ProductInsert from '@/components/product/product-insert'
 import ProductShow from '@/components/product/product-show'
 import ProductDatails from '@/components/product/product-details'
+import ProductReport from '@/components/product/product-report'
 
 import clientEdit from '@/components/client/client-edit'
 import clientShow from '@/components/client/client-show'
@@ -64,6 +65,10 @@ export default new Router({
     {
       path: '/sale/',
       component: sale
+    },
+    {
+      path: '/products/report',
+      component: ProductReport
     }
   ]
 })
