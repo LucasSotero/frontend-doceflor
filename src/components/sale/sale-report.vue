@@ -4,6 +4,8 @@
           <div class="row">
            <div class="input-field col s12">
                 <div class="row">
+                    <h5 class="center-align">Relatório de Vendas</h5>
+                    <div class="row"></div>
                     <form class="col s12">
                         <div class="row">
                             <div class="input-field col s2">
@@ -14,18 +16,35 @@
                                 <input type="date" class="center-align datepicker">
                                 <label>Período Final</label>
                             </div>
-                            <div class="input-field col s5">
+                            <div class="input-field col s2">
                                 <select multiple>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>                   
+                                    <option value="1">Dinheiro</option>
+                                    <option value="2">Debito</option>
+                                    <option value="3">Crédito</option>
+                                    <option value="3">Fiado</option>                  
                                 </select>
-                                <label>Categorias</label>
+                                <label>Método de Pagamento</label>
+                            </div>
+                            <div class="input-field col s3">
+                                <select multiple>
+                                    <option value="1">Produto 1</option>
+                                    <option value="2">Produto 2</option>
+                                    <option value="3">Produto 3</option>                   
+                                </select>
+                                <label>Produtos</label>
+                            </div>
+                            <div class="input-field col s3">
+                                <select multiple>
+                                    <option value="1">Cliente 1</option>
+                                    <option value="2">Cliente 2</option>
+                                    <option value="3">Cliente 3</option>                   
+                                </select>
+                                <label>Clientes</label>
                             </div>
                         </div>
                     </form>
                 </div>
-                </div>
+              </div>
            </div>
       </div>
   </div>

@@ -15,6 +15,7 @@ import clientDatails from '@/components/client/client-details'
 import sale from '@/components/sale/Sale'
 import saleShow from '@/components/sale/sale-show'
 import saleDatails1 from '@/components/sale/sale-details'
+import saleReport from '@/components/sale/sale-report'
 
 Vue.use(Router)
 
@@ -69,6 +70,10 @@ export default new Router({
     {
       path: '/products/report',
       component: ProductReport
+    },
+    {
+      path: '/sales/report',
+      component: saleReport
     }
   ]
 })
