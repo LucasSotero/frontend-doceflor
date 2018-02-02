@@ -18,26 +18,19 @@
                             </div>
                             <div class="input-field col s2">
                                 <select multiple>
-                                    <option value="1">Dinheiro</option>
-                                    <option value="2">Debito</option>
-                                    <option value="3">Crédito</option>
-                                    <option value="3">Fiado</option>                  
+                                    <option v-for="method in methods">{{method}}</option>                
                                 </select>
                                 <label>Método de Pagamento</label>
                             </div>
                             <div class="input-field col s3">
                                 <select multiple>
-                                    <option value="1">Produto 1</option>
-                                    <option value="2">Produto 2</option>
-                                    <option value="3">Produto 3</option>                   
+                                    <option v-for="product in products">{{product[1]}}</option>                 
                                 </select>
                                 <label>Produtos</label>
                             </div>
                             <div class="input-field col s3">
-                                <select multiple>
-                                    <option value="1">Cliente 1</option>
-                                    <option value="2">Cliente 2</option>
-                                    <option value="3">Cliente 3</option>                   
+                                <select>
+                                    <option v-for="client in clients">{{client[1]}}</option>                  
                                 </select>
                                 <label>Clientes</label>
                             </div>
@@ -46,6 +39,7 @@
                 </div>
               </div>
            </div>
+           <button class="btn" @click="generate()"></button>
       </div>
   </div>
 </template>
@@ -54,6 +48,15 @@
 import $ from 'jquery'
 export default {
   mounted () {
+    this.$store.report.dispatch('getProducts').then(() => {
+      console.log('teste')
+    })
+    this.$store.report.dispatch('getClients').then(() => {
+      console.log('teste')
+    })
+    this.$store.report.dispatch('getMethods').then(() => {
+      console.log('teste')
+    })
     $(function () {
       $(document).ready(function () {
         $('select').material_select()
@@ -84,6 +87,27 @@ export default {
         $('.datepicker').first().pickadate('picker').open()
       })
     })
+  },
+  methods: {
+    generate: function () {
+      return this.$store.report.dispatch('getReport').then(() => {
+        console.log('teste')
+      })
+    }
+  },
+  computed: {
+    products: function () {
+      return this.$store.report.state.products
+    },
+    clients: function () {
+      return this.$store.report.state.clients
+    },
+    methods: function () {
+      return this.$store.report.state.methods
+    },
+    report: function () {
+      return this.$store.report.state.report
+    }
   }
 }
 </script>
