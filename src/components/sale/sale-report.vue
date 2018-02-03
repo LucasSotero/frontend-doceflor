@@ -9,27 +9,27 @@
                     <form class="col s12">
                         <div class="row">
                             <div class="input-field col s2">
-                                <input type="date" class="center-align datepicker">
+                                <input type="text" v-model="dateStart">
                                 <label >Período Inicial</label>
                             </div>
                             <div class="input-field col s2">
-                                <input type="date" class="center-align datepicker">
+                                <input type="text" v-model="dateEnd">
                                 <label>Período Final</label>
                             </div>
                             <div class="input-field col s2">
-                                <select multiple v-model="selectMethod">
-                                    <option v-for="method in methods" :value="method[0]">{{method}}</option>
+                                <select v-select=selectMethod>
+                                    <option v-for="method in methods">{{method}}</option>
                                 </select>
                                 <label>Método de Pagamento</label>
                             </div>
                             <div class="input-field col s3">
-                                <select multiple v-model="selectProduct">
+                                <select v-select=selectProduct>
                                     <option v-for="product in products" :value="product[0]">{{product[1]}}</option>
                                 </select>
                                 <label>Produtos</label>
                             </div>
                             <div class="input-field col s3">
-                                <select v-model="selectClient">
+                                <select v-select=selectClient>
                                     <option v-for="client in clients" :value="client[0]">{{client[1]}}</option>
                                 </select>
                                 <label>Clientes</label>
@@ -49,9 +49,11 @@ import $ from 'jquery'
 export default {
   data () {
     return {
-      selectClient: null,
-      selectProduct: null,
-      selectMethod: null
+      dateStart: undefined,
+      dateEnd: undefined,
+      selectClient: [undefined],
+      selectProduct: [undefined],
+      selectMethod: [undefined]
     }
   },
   mounted () {
@@ -97,21 +99,15 @@ export default {
   },
   methods: {
     generate: function () {
-      let p = []
-      this.$store.report.state.products.forEach(element => {
-        p.push(element[0])
-      })
-      let c = []
-      this.$store.report.state.clients.forEach(element => {
-        c.push(element[0])
-      })
       let data = {
-        methods: this.$store.report.state.methods,
-        products: p,
-        clients: c
+        start: this.dateStart,
+        end: this.dateEnd,
+        methods: this.selectMethod,
+        products: this.selectProduct,
+        clients: this.selectClient
       }
       return this.$store.report.dispatch('getReport', data).then(() => {
-        console.log('teste')
+        console.log('Metodos =>' + this.selectMethod)
       })
     }
   },
