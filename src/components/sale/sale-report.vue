@@ -17,20 +17,20 @@
                                 <label>Período Final</label>
                             </div>
                             <div class="input-field col s2">
-                                <select multiple>
-                                    <option v-for="method in methods">{{method}}</option>                
+                                <select multiple v-model="selectMethod">
+                                    <option v-for="method in methods" :value="method[0]">{{method}}</option>
                                 </select>
                                 <label>Método de Pagamento</label>
                             </div>
                             <div class="input-field col s3">
-                                <select multiple>
-                                    <option v-for="product in products">{{product[1]}}</option>                 
+                                <select multiple v-model="selectProduct">
+                                    <option v-for="product in products" :value="product[0]">{{product[1]}}</option>
                                 </select>
                                 <label>Produtos</label>
                             </div>
                             <div class="input-field col s3">
-                                <select>
-                                    <option v-for="client in clients">{{client[1]}}</option>                  
+                                <select v-model="selectClient">
+                                    <option v-for="client in clients" :value="client[0]">{{client[1]}}</option>
                                 </select>
                                 <label>Clientes</label>
                             </div>
@@ -47,6 +47,13 @@
 <script>
 import $ from 'jquery'
 export default {
+  data () {
+    return {
+      selectClient: null,
+      selectProduct: null,
+      selectMethod: null
+    }
+  },
   mounted () {
     this.$store.report.dispatch('getProducts').then(() => {
       console.log('teste')
@@ -90,7 +97,20 @@ export default {
   },
   methods: {
     generate: function () {
-      return this.$store.report.dispatch('getReport').then(() => {
+      let p = []
+      this.$store.report.state.products.forEach(element => {
+        p.push(element[0])
+      })
+      let c = []
+      this.$store.report.state.clients.forEach(element => {
+        c.push(element[0])
+      })
+      let data = {
+        methods: this.$store.report.state.methods,
+        products: p,
+        clients: c
+      }
+      return this.$store.report.dispatch('getReport', data).then(() => {
         console.log('teste')
       })
     }

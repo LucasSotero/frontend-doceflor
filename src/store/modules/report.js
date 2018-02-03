@@ -36,14 +36,8 @@ export default {
         context.commit('updateClients', Response.data)
       })
     },
-    getReport (context) {
-      var data = {
-        methods: this.$store.report.state.products,
-        products: this.$store.report.state.products,
-        clients: this.$store.report.state.clients
-      }
+    getReport (context, data) {
       window.axios.post('/sales/report', data).then(Response => {
-        console.log(Response)
         context.commit('update', Response.data)
       })
     }
