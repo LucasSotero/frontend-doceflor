@@ -6,32 +6,11 @@
         <a class="waves-effect waves-light btn" href="#/products/new">Novo</a>
       </div>
       <div class="input-field right col s4">
-        <input type="text" id="autocomplete" class="autocomplete">
+        <input type="text" id="autocomplete" :test="del" class="autocomplete">
         <label for="autocomplete">Buscar</label>
       </div>
     </div>
-  <table>
-    <thead>
-      <tr>
-        <th>Código de barras</th>
-        <th>Descrição</th>
-        <th>Valor</th>
-        <th class="center-padding">Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="product in products">
-        <td>{{product[1]}}</td>
-        <td>{{product[2]}}</td>
-        <td>{{product[3]}}</td>
-        <td class="right">
-          <a class="waves-effect waves-light btn-small green btn" @click="stock(product[0])"><i class="material-icons">subject</i></a>
-          <a class="waves-effect waves-light btn-small blue btn" @click="details(product[0])"><i class="material-icons">edit</i></a>
-          <a class="waves-effect waves-light btn-small red btn" @click="del(product[0])"><i class="material-icons">delete</i></a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    <v-table :list="products"></v-table>
 </div>
 </template>
 
@@ -40,10 +19,16 @@
 import $ from 'jquery'
 export default {
   name: 'product-show',
+  data () {
+    return {
+    }
+  },
   computed: {
     products: function () {
       return this.$store.product.state.products
     }
+  },
+  created () {
   },
   mounted () {
     this.$store.product.dispatch('getAll')
@@ -60,6 +45,14 @@ export default {
     })
   },
   methods: {
+    table: {
+      testo: function () {
+        alert('ok')
+      }
+    },
+    testo: function () {
+      alert('ok')
+    },
     del: function (id) {
       this.$store.product.dispatch('remove', id).then(() => {
       })
@@ -75,7 +68,7 @@ export default {
     saveInventoryMovement: function () {
       alert('123')
     },
-    stock: function (id) {
+    subject: function (id) {
       this.$router.push('/products/details/' + id)
     }
   }

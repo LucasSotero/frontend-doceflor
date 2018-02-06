@@ -32,6 +32,8 @@
       </tr>
     </tbody>
   </table>
+  <a class="waves-effect waves-light btn-small red btn" @click="testo()"><i class="material-icons">delete</i></a>
+  <v-table :list="list" :testes="del()"></v-table>
 </div>
 </template>
 
@@ -40,6 +42,15 @@
 import $ from 'jquery'
 export default {
   name: 'sale-show',
+  data () {
+    return {
+      list: [
+        [1, 1, 1, 1],
+        [1, 1, 1, 1],
+        [1, 1, 1, 1]
+      ]
+    }
+  },
   computed: {
     sales: function () {
       return this.$store.sale.state.sales
@@ -65,6 +76,9 @@ export default {
     })
   },
   methods: {
+    testo () {
+      console.log('teste')
+    },
     del: function (id) {
       this.$store.sale.dispatch('remove', id).then(() => {
       })
