@@ -6,11 +6,10 @@
         <a class="waves-effect waves-light btn" href="#/products/new">Novo</a>
       </div>
       <div class="input-field right col s4">
-        <input type="text" id="autocomplete" :test="del" class="autocomplete">
         <label for="autocomplete">Buscar</label>
       </div>
     </div>
-    <v-table :list="products"></v-table>
+    <v-table :list="tableProducts"></v-table>
 </div>
 </template>
 
@@ -24,7 +23,7 @@ export default {
     }
   },
   computed: {
-    products: function () {
+    tableProducts: function () {
       return this.$store.product.state.products
     }
   },
@@ -45,31 +44,15 @@ export default {
     })
   },
   methods: {
-    table: {
-      testo: function () {
-        alert('ok')
-      }
+    tableSubject: function (id) {
+      this.$router.push('/products/details/' + id)
     },
-    testo: function () {
-      alert('ok')
-    },
-    del: function (id) {
-      this.$store.product.dispatch('remove', id).then(() => {
-      })
-    },
-    details: function (id) {
+    tableEdit: function (id) {
       this.$router.push('/products/view/' + id)
     },
-    inventoryMovement: function (id) {
-      $('.modal').modal()
-      $('#inventoryMovement').modal('open')
-      $('.trigger-modal').modal()
-    },
-    saveInventoryMovement: function () {
-      alert('123')
-    },
-    subject: function (id) {
-      this.$router.push('/products/details/' + id)
+    tableDelete: function (id) {
+      this.$store.product.dispatch('remove', id).then(() => {
+      })
     }
   }
 }
