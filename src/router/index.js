@@ -1,21 +1,21 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import ProductEdit from '@/components/product/product-edit'
-import ProductInsert from '@/components/product/product-insert'
-import ProductShow from '@/components/product/product-show'
-import ProductDatails from '@/components/product/product-details'
-import ProductReport from '@/components/product/product-report'
+import ProductEdit from '@/components/product/edit'
+import ProductInsert from '@/components/product/insert'
+import ProductShow from '@/components/product/show'
+import ProductDatails from '@/components/product/details'
+import ProductReport from '@/components/product/report'
 
-import clientEdit from '@/components/client/client-edit'
-import clientShow from '@/components/client/client-show'
-import clientInsert from '@/components/client/client-insert'
-import clientDatails from '@/components/client/client-details'
+import clientEdit from '@/components/client/edit'
+import clientShow from '@/components/client/show'
+import clientInsert from '@/components/client/insert'
+import clientDatails from '@/components/client/details'
 
 import sale from '@/components/sale/Sale'
-import saleShow from '@/components/sale/sale-show'
-import saleDatails1 from '@/components/sale/sale-details'
-import saleReport from '@/components/sale/sale-report'
+import saleShow from '@/components/sale/show'
+import saleDatails1 from '@/components/sale/details'
+import saleReport from '@/components/sale/report'
 
 Vue.use(Router)
 

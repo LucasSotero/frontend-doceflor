@@ -17,12 +17,8 @@ export default {
   actions: {
     getOne (context, data) {
       window.axios.get('/products/search/' + data).then(Response => {
-        let result = {
-          id: Response.data.data._id,
-          name: Response.data.data.name,
-          value: Response.data.data.value
-        }
-        context.commit('updateOne', result)
+        Response.data = [Response.data.data._id, Response.data.data.barCode, Response.data.data.name, Response.data.data.value]
+        context.commit('updateOne', Response.data)
       })
     }
   }

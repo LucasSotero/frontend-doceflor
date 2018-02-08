@@ -1,12 +1,18 @@
 <template>
-  <a class="waves-effect waves-light btn-small btn"><i class="material-icons">edit</i></a>
+  <button :class="'waves-effect waves-light btn-small btn ' + type" @click="action"><i class="material-icons">{{type}}</i></button>
 </template>
 
 <script>
 export default {
-  props: ['type']
+  props: ['type'],
+  methods: {
+    action () {
+      this.$emit('click')
+    }
+  }
 }
 </script>
+
 
 <style>
 .btn-small {
@@ -14,18 +20,19 @@ export default {
     line-height: 24px;
     padding: 0 0.5rem;
     color: white;
+    margin:2px;
 }
 .center-padding {
   text-align: right;
   padding: 4.5%;
 }
-.btn-edit {
+.edit {
   background-color: #2196f3 !important;
 }
-.btn-subject {
+.subject {
   background-color: #4CAF50 !important;
 }
-.btn-delete {
+.delete {
   background-color: #f44336 !important;
 }
 </style>
