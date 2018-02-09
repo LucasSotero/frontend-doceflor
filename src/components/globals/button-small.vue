@@ -1,12 +1,18 @@
 <template>
-  <a :class="'waves-effect waves-light btn-small btn ' +this.name"><i class="material-icons">{{name}}</i></a>
+  <button :class="'waves-effect waves-light btn-small btn ' + this.name" @click="action"><i class="material-icons">{{name}}</i></button>
 </template>
 
 <script>
 export default {
-  props: ['name']
+  props: ['name'],
+  methods: {
+    action () {
+      this.$emit('click')
+    }
+  }
 }
 </script>
+
 
 <style>
 .btn-small {
@@ -14,6 +20,7 @@ export default {
     line-height: 24px;
     padding: 0 0.5rem;
     color: white;
+    margin:2px;
 }
 .center-padding {
   text-align: right;

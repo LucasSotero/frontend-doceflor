@@ -13,7 +13,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="line in product.history">
+      <tr v-for="line in product.history" :key="line">
         <td>{{line.date}}</td>
         <td>{{line.amount}}</td>
         <td>{{line.value}}</td>

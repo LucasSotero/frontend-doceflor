@@ -2,15 +2,15 @@
   <table class="highlight" align="center">
     <thead>
       <tr>
-        <th v-for="(head, key) in header" :key="key">{{head}}</th>
+        <th v-for="(head, index) in headers" :key="index">{{head}}</th>
         <th class="center-padding">Ações</th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="data in list" :key="data[0]">
-        <td v-for="i in data.length - 1" :key="data[i]">{{data[i]}}</td>
+      <tr v-for="data in list" :key="data[0]" >
+        <td v-for="i in data.length - 1"  :key="i">{{data[i]}}</td>
         <td class="right">
-          <v-button-small  v-for="(button, key) in buttons" :key="key" :name="button"></v-button-small>
+          <v-button-small v-for="(button, key) in buttons" :key="key" :name="button" @click="action(key, data[0])"></v-button-small>
         </td>
       </tr>
     </tbody>
@@ -24,13 +24,9 @@ export default {
       type: String,
       default: 'table'
     },
-    header: {
-      type: Array,
-      default: () => []
+    headers: {
     },
     list: {
-      type: Array,
-      default: () => []
     },
     actions: {
       type: Array,
@@ -44,6 +40,7 @@ export default {
   created () {
     for (var m in this.$parent) {
       if (typeof this.$parent[m] === 'function' && m.match(this.name)) {
+        console.log('m' + m)
         this.actions.push(m)
         m = m.replace(this.name, '')
         this.buttons.push(m.toLowerCase())
@@ -58,26 +55,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.btn-small {
-    height: 24px;
-    line-height: 24px;
-    padding: 0 0.5rem;
-    color: white;
-    margin:2px;
-}
-.center-padding {
-  text-align: right;
-  padding: 4.5%;
-}
-.edit {
-  background-color: #2196f3 !important;
-}
-.subject {
-  background-color: #4CAF50 !important;
-}
-.delete {
-  background-color: #f44336 !important;
-}
-</style>

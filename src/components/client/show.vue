@@ -3,41 +3,41 @@
   <div class="row margin"></div>
     <div class="row">
       <div class="input-field col s4">
-        <v-a href="#/products/new">novo</v-a>
+        <v-a href="#/clients/new">novo</v-a>
       </div>
       <div class="input-field right col s4">
         <label for="autocomplete">Buscar</label>
       </div>
     </div>
-    <v-table :list="tableProducts" :headers="header"></v-table>
+    <v-table :list="tableClients" :headers="header"></v-table>
 </div>
 </template>
 
 <script>
 export default {
-  name: 'product-show',
+  name: 'client-show',
   data () {
     return {
-      header: ['Código', 'Descrição', 'Valor']
+      header: ['Nome']
     }
   },
   computed: {
-    tableProducts: function () {
-      return this.$store.product.state.products
+    tableClients: function () {
+      return this.$store.client.state.clients
     }
   },
   mounted () {
-    this.$store.product.dispatch('getAll')
+    this.$store.client.dispatch('getAll')
   },
   methods: {
     tableSubject: function (id) {
-      this.$router.push('/products/details/' + id)
+      this.$router.push('/clients/details/' + id)
     },
     tableEdit: function (id) {
-      this.$router.push('/products/view/' + id)
+      this.$router.push('/clients/view/' + id)
     },
     tableDelete: function (id) {
-      this.$store.product.dispatch('remove', id).then(() => {
+      this.$store.client.dispatch('remove', id).then(() => {
       })
     }
   }
