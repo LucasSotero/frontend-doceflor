@@ -1,10 +1,10 @@
 <template>
-  <a class="waves-effect waves-light btn-small btn"><i class="material-icons">edit</i></a>
+  <a :class="'waves-effect waves-light btn-small btn ' +this.name"><i class="material-icons">{{name}}</i></a>
 </template>
 
 <script>
 export default {
-  props: ['type']
+  props: ['name']
 }
 </script>
 
@@ -19,13 +19,13 @@ export default {
   text-align: right;
   padding: 4.5%;
 }
-.btn-edit {
+.edit {
   background-color: #2196f3 !important;
 }
-.btn-subject {
+.subject {
   background-color: #4CAF50 !important;
 }
-.btn-delete {
+.delete {
   background-color: #f44336 !important;
 }
 </style>

@@ -7,4 +7,4 @@ Vue.component('v-modal', Modal)
 
 Vue.component('v-table', Table)
 
-Vue.component('v-btn-small', ButtonSmall)
+Vue.component('v-button-small', ButtonSmall)

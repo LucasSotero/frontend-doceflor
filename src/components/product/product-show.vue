@@ -9,7 +9,7 @@
         <label for="autocomplete">Buscar</label>
       </div>
     </div>
-    <v-table :list="tableProducts"></v-table>
+    <v-table :list="tableProducts" :header="['Código', 'Nome', 'Valor']"></v-table>
 </div>
 </template>
 

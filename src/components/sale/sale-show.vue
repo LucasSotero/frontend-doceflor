@@ -20,7 +20,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="sale in sales">
+      <tr v-for="sale in sales" :key="sale[0]">
         <td>{{sale[1]}}</td>
         <td>{{sale[2]}}</td>
         <td>{{sale[3]}}</td>

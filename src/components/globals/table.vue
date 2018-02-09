@@ -2,17 +2,15 @@
   <table class="highlight" align="center">
     <thead>
       <tr>
-        <th>Código de barras</th>
-        <th>Descrição</th>
-        <th>Valor</th>
+        <th v-for="(head, key) in header" :key="key">{{head}}</th>
         <th class="center-padding">Ações</th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="data in list">
-        <td v-for="i in data.length - 1">{{data[i]}}</td>
+      <tr v-for="data in list" :key="data[0]">
+        <td v-for="i in data.length - 1" :key="data[i]">{{data[i]}}</td>
         <td class="right">
-          <a v-for="(button, key) in buttons" :class="'waves-effect waves-light btn-small btn ' + button" @click="action(key, data[0])"><i class="material-icons">{{button}}</i></a>
+          <v-button-small  v-for="(button, key) in buttons" :key="key" :name="button"></v-button-small>
         </td>
       </tr>
     </tbody>
@@ -25,6 +23,10 @@ export default {
     name: {
       type: String,
       default: 'table'
+    },
+    header: {
+      type: Array,
+      default: () => []
     },
     list: {
       type: Array,
