@@ -37,8 +37,7 @@ export default {
       this.$router.push('/clients/view/' + id)
     },
     tableDelete: function (id) {
-      this.$store.client.dispatch('remove', id).then(() => {
-      })
+      this.$store.client.dispatch('remove', id)
     }
   }
 }

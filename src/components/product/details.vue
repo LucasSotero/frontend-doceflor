@@ -108,4 +108,11 @@ export default {
   text-align: right;
   padding: 2.5%;
 }
+thead {
+    height:50px;
+    background:#F0F0F0;
+    border:1px solid #CCC;
+    width:12;
+    margin:0px auto;
+}
 </style>

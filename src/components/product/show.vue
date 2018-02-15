@@ -1,15 +1,6 @@
 <template>
 <div class="container">
-  <div class="row margin"></div>
-    <div class="row">
-      <div class="input-field col s4">
-        <v-a href="#/products/new">novo</v-a>
-      </div>
-      <div class="input-field right col s4">
-        <label for="autocomplete">Buscar</label>
-      </div>
-    </div>
-    <v-table :list="tableProducts" :headers="header"></v-table>
+  <v-table :list="tableProducts" :headers="header"></v-table>
 </div>
 </template>
 
@@ -43,3 +34,7 @@ export default {
   }
 }
 </script>
+
+<style>
+
+</style>

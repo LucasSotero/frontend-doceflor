@@ -11,13 +11,13 @@ export default {
       state.products.splice(data, 1)
     },
     updateValue (state, data) {
-      state.products[data.key].value = data.data
+      state.products[data.key] = data.data
     }
   },
   actions: {
     getOne (context, data) {
       window.axios.get('/products/search/' + data).then(Response => {
-        Response.data = [Response.data.data._id, Response.data.data.barCode, Response.data.data.name, Response.data.data.value]
+        Response.data = [Response.data.data.barCode, Response.data.data.name, Response.data.data.value]
         context.commit('updateOne', Response.data)
       })
     }

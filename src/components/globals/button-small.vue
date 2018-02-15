@@ -1,5 +1,5 @@
 <template>
-  <button :class="'waves-effect waves-light btn-small btn ' + this.name" @click="action"><i class="material-icons">{{name}}</i></button>
+  <button :class="'waves-effect waves-light btn-small btn ' + this.name" @click.prevent="action"><i class="material-icons">{{name}}</i></button>
 </template>
 
 <script>
@@ -22,10 +22,6 @@ export default {
     color: white;
     margin:2px;
 }
-.center-padding {
-  text-align: right;
-  padding: 4.5%;
-}
 .edit {
   background-color: #2196f3 !important;
 }
@@ -34,5 +30,8 @@ export default {
 }
 .delete {
   background-color: #f44336 !important;
+}
+.add {
+  background-color: #2196f3 !important;
 }
 </style>

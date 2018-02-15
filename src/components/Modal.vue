@@ -2,7 +2,8 @@
 <div>
   <button class="btn" @click="modal">Novo</button>
   <div :id="key1" class="modal modal-fixed-footer">
-  <slot/>
+  <slot>
+  </slot>
   </div>
 </div>
 </template>

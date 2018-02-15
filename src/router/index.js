@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import modal2 from '@/components/Modal'
+
 import ProductEdit from '@/components/product/edit'
 import ProductInsert from '@/components/product/insert'
 import ProductShow from '@/components/product/show'
@@ -16,11 +18,16 @@ import sale from '@/components/sale/Sale'
 import saleShow from '@/components/sale/show'
 import saleDatails1 from '@/components/sale/details'
 import saleReport from '@/components/sale/report'
+import modal from '@/components/sale/modal-sale'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '/modal2',
+      component: modal2
+    },
     {
       path: '/sales',
       component: saleShow
@@ -74,6 +81,10 @@ export default new Router({
     {
       path: '/sales/report',
       component: saleReport
+    },
+    {
+      path: '/sales/modal',
+      component: modal
     }
   ]
 })
